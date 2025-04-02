@@ -11,7 +11,7 @@
     // Según el variant definimos los estilos base y extra para el span
     if ($variant === 'simple') {
         $baseClass = 'btn btn-arrow';
-        $variantClass = 'btn-primary mt-3';
+        $variantClass = 'btn-primary mt-3 btn-dinamic';
         $spanClass = '';
     } elseif ($variant === 'link') {
         $baseClass = ' btn-arrow';
@@ -19,7 +19,7 @@
         $spanClass = 'text-decoration-underline';
     } else { // 'primary' para </button>
     $baseClass = 'btn btn-arrow';
-        $variantClass = 'btn-primary mt-3';
+        $variantClass = 'btn-primary mt-3 btn-dinamic';
         $spanClass = '';
     }
 

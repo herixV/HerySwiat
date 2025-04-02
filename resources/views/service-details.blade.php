@@ -3,17 +3,7 @@
 @section('content')
 
 @section('breadcrumbs')
-{{-- <x-breadcrumbs title="Service-Details" image="" :links="[['name' => 'Services', 'url' => '/']]" /> --}}
 <x-breadcrumbs title="Service-Details" :links="[['name' => 'Services', 'url' => 'services'], ['name' => 'Service-Details', 'url' => '']]" />
-{{-- @component('components.breadcrumbs', [
-    'title' => 'Service-Details',
-    'links' => [
-        ['name' => 'Services', 'url' => 'services'],
-        ['name' => 'Service-Details', 'url' => '']
-    ]
-]) 
-@endcomponent --}}
-
 @endsection
 
 <div class="padding-small">
@@ -23,15 +13,14 @@
           <div class="row">
             <article class="post-item">
               <h3 class="display-3 fw-normal mb-5">{{ $service->name}}</h3>
-              <p>{{ $service->short_description}}</p>
               <div class="hero-image mt-5">
                 <img src="{{$service->image}}" alt="single-post" class="img-fluid">
               </div>
               <div class="post-content py-5">
-                <p>{{ $service->description}}</p>
+                <p>{{ $service->short_description}}</p>
                 <div class="post-description">
-                  {{-- <p>{{ $services->description}}</p> --}}
-                  <blockquote>{{ $service->description}}</blockquote>
+                  <p>{!! $service->description!!}</p>
+                  {{-- <blockquote>{!! $service->description!!}</blockquote> --}}
                   {{-- <div class="my-5">
                     <h4 class="mb-3">Consectetur Facilisis Vivamus</h4>
                     <ul class="inner-list list-unstyled">
@@ -89,7 +78,8 @@
                 <span>Book Now <svg width="18" height="18">
                     <use xlink:href="#arrow-right"></use>
                   </svg></span>
-              </a>            </div>
+              </a>            
+            </div>
 
             <div class="widget sidebar-categories mb-5">
               <h4 class="widget-title fw-normal border-bottom pb-3 mb-3">Services Offered</h4>

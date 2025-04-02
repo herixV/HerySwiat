@@ -73,6 +73,7 @@
               <textarea name="message" placeholder="Write Your Message Here" class="form-control ps-3" rows="8"></textarea>
             </div>
             <div class="d-grid">
+              <x-button title="Send Message" type="submit" variant="simple" />
               <button class="btn btn-arrow btn-primary mt-3"><span>Submit <svg width="18" height="18">
                 <use xlink:href="#arrow-right"></use>
               </svg></span></button>

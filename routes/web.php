@@ -1,6 +1,10 @@
 <?php
 
 // use App\Http\Controllers\HomeController;
+
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ModelsController;
+use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ViewsController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,6 +30,32 @@ Route::get('/register', [ViewsController::class, 'register'])-> name('register')
 
 Route::get('/login', [ViewsController::class, 'login'])-> name('login');
 
+// Login Administration
+Route::get('/admin', [LoginController::class, 'login'])->name('login')->middleware('guest');
+Route::post('/admin', [LoginController::class, 'auth'])-> name('auth');
+// LogOut Administration
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+// dashboard Administration
+Route::get('/admin/dashboard', [LoginController::class, 'dashboard'])-> name('dashboard')->middleware('auth');
+
+// CRUD Administration Services 
+Route::get('/admin/serviceList', [ServiceController::class, 'serviceList'])->name('serviceList')->middleware('auth');
+// Create Service
+Route::get('admin/serviceCreate', [ServiceController::class, 'create'])->name('serviceCreate')->middleware('auth');
+Route::post('admin/serviceStore', [ServiceController::class, 'store'])->name('serviceStore')->middleware('auth');
+// Edit Service
+Route::get('admin/serviceEdit/{id}', [ServiceController::class, 'edit'])->name('serviceEdit')->middleware('auth');
+Route::put('admin/serviceUpdate/{id}', [ServiceController::class, 'update'])->name('serviceUpdate')->middleware('auth');
+
+Route::delete('admin/serviceDelete/{id}', [ServiceController::class, 'destroy'])->name('serviceDelete')->middleware('auth');
+
+// CRUD Administration models
+Route::get('/admin/modelList', [ModelsController::class, 'modelList'])->name('modelList')->middleware('auth');
+Route::get('/admin/modelCreate', [ModelsController::class, 'create'])->name('modelCreate')->middleware('auth');
+Route::post('/admin/modelStore', [ModelsController::class, 'store'])->name('modelStore')->middleware('auth');
+Route::get('/admin/modelEdit/{id}', [ModelsController::class, 'edit'])->name('modelEdit')->middleware('auth');
+Route::put('/admin/modelUpdate/{id}', [ModelsController::class, 'update'])->name('modelUpdate')->middleware('auth');
+Route::get('/admin/modelDelete/{id}', [ModelsController::class, 'destroy'])->name('modelDelete')->middleware('auth');
 // Route::fallback(function () {
 //     return view('404');
 // });

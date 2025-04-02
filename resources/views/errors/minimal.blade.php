@@ -24,23 +24,10 @@
     <body class="antialiased">
          {{-- svg --}}
         @include('layouts.svg')
-        {{-- <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center sm:pt-0">
-            <div class="max-w-xl mx-auto sm:px-6 lg:px-8">
-                <div class="flex items-center pt-8 sm:justify-start sm:pt-0">
-                    <div class="px-4 text-lg text-gray-500 border-r border-gray-400 tracking-wider">
-                        @yield('code')
-                    </div>
-
-                    <div class="ml-4 text-lg text-gray-500 uppercase tracking-wider">
-                        @yield('message')
-                    </div>
-                </div>
-            </div>
-        </div> --}}
         <section id="error-404" data-aos="fade-up">
             <div class="container-fluid pt-3 padding-side">
                 <div class="d-flex rounded-5"
-                    style="background-image: url(./assets/img/DAbanner2.jpg); background-size: cover; background-repeat: no-repeat; height: 95vh; background-position: center;">
+                    style="background-image: url({{url('assets/img/DAbanner2.jpg')}}); background-size: cover; background-repeat: no-repeat; height: 95vh; background-position: center;">
                     <div class="row align-items-center m-auto pt-0 px-4 px-lg-0">
                         <div class="text-center col-12">
                             <h1 class="display-1 fw-bold  text-white"> @yield('code')</h1>

@@ -29,10 +29,14 @@
                     @endforeach
                 </ul>
                 <ul class="info d-flex flex-wrap list-unstyled m-0">
+                    @if (Auth::check())
+                    <a href="{{ route('logout') }}" class="btn-smaller"><b>Log Out </b></a>
+                    @elseif (!Auth::check())
                     <!-- Botones de sesión más compactos -->
                     <a href="{{ url('/login') }}" class="btn-smaller"><b>Log In </b></a>
                     &nbsp;
                     <a href="{{ url('/register') }}" class="btn-smaller"><b>Register</b></a>
+                    @endif
                 </ul>
             </div>
         </div>
@@ -76,6 +80,86 @@
                                 </a>
                             </form>
                         </div>
+                        @if (Auth::check())
+                        <ul class="navbar-nav align-items-center mb-2 mb-lg-0">
+                            <li class="nav-item px-3">
+                                <a class="nav-link p-0 {{ Request()->routeIs('dashboard') ? 'active' : '' }}" aria-current="page"
+                                href="{{ route('dashboard') }}">Dashboard</a>
+                            </li>
+                            <li class="nav-item px-3">
+                                <a class="nav-link p-0 {{ Request()->routeIs('serviceList') ? 'active' : '' }}"
+                                    href="{{ route('serviceList') }}">serviceList</a>
+                            </li>
+                            {{-- <li class="nav-item px-3">
+                                <a class="nav-link p-0 {{ Request::is('gallery') ? 'active' : '' }}"
+                                    href="{{ url('/gallery') }}">Gallery</a>
+                            </li>
+                            <li class="nav-item px-3">
+                                <a class="nav-link p-0 {{ Request::is('models') ? 'active' : '' }}"
+                                    href="{{ url('/models') }}">models</a>
+                            </li>
+                            <li class="nav-item px-3">
+                                <a class="nav-link p-0 {{ Request::is('services') ? 'active' : '' }}"
+                                    href="{{ url('/services') }}">Services</a>
+                            </li>
+                            <li class="nav-item px-3">
+                                <a class="nav-link p-0 {{ Request::is('blog') ? 'active' : '' }}"
+                                    href="{{ url('/blog') }}">Blog</a>
+                            </li>
+                            <li class="nav-item px-3">
+                                <a class="nav-link p-0 {{ Request::is('contact') ? 'active' : '' }}"
+                                    href="{{ url('/contact') }}">Contact</a>
+                            </li> --}}
+                            <li class="nav-item px-3 dropdown">
+                                <a class="nav-link p-0 dropdown-toggle text-center " data-bs-toggle="dropdown"
+                                    href="#" role="button" aria-expanded="false">Pages</a>
+                                <ul class="dropdown-menu dropdown-menu-end animate slide mt-3 border-0 shadow">
+                                    <li class="nav-item px-3">
+                                        <a class="nav-link p-0 {{ Request::is('/') ? 'active' : '' }}" aria-current="page"
+                                            href="{{ url('/') }}">Home</a>
+                                    </li>
+                                    <li class="nav-item px-3">
+                                        <a class="nav-link p-0 {{ Request::is('about') ? 'active' : '' }}"
+                                            href="{{ url('/about') }}">About</a>
+                                    </li>
+                                    <li class="nav-item px-3">
+                                        <a class="nav-link p-0 {{ Request::is('gallery') ? 'active' : '' }}"
+                                            href="{{ url('/gallery') }}">Gallery</a>
+                                    </li>
+                                    <li class="nav-item px-3">
+                                        <a class="nav-link p-0 {{ Request::is('models') ? 'active' : '' }}"
+                                            href="{{ url('/models') }}">models</a>
+                                    </li>
+                                    <li class="nav-item px-3">
+                                        <a class="nav-link p-0 {{ Request::is('services') ? 'active' : '' }}"
+                                            href="{{ url('/services') }}">Services</a>
+                                    </li>
+                                    <li class="nav-item px-3">
+                                        <a class="nav-link p-0 {{ Request::is('blog') ? 'active' : '' }}"
+                                            href="{{ url('/blog') }}">Blog</a>
+                                    </li>
+                                    <li class="nav-item px-3">
+                                        <a class="nav-link p-0 {{ Request::is('contact') ? 'active' : '' }}"
+                                            href="{{ url('/contact') }}">Contact</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ url('/sitemap') }}"
+                                            class="dropdown-item  {{ Request::is('sitemap') ? 'active' : '' }}">sitemap
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ url('/reviews') }}"
+                                            class="dropdown-item {{ Request::is('reviews') ? 'active' : '' }}">Reviews
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ url('/faqs') }} "
+                                            class="dropdown-item {{ Request::is('faqs') ? 'active' : '' }}">FAQs </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        @else
                         <ul class="navbar-nav align-items-center mb-2 mb-lg-0">
                             <li class="nav-item px-3">
                                 <a class="nav-link p-0 {{ Request::is('/') ? 'active' : '' }}" aria-current="page"
@@ -126,6 +210,7 @@
                                 </ul>
                             </li>
                         </ul>
+                        @endif
                     </div>
                 </div>
                 <div class="search d-lg-block d-none">

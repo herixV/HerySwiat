@@ -7,7 +7,11 @@
                 <div class="d-flex flex-wrap flex-column justify-content-center align-items-center">
                     <h2 class="display-1 fw-normal">{{ $title }}</h2>
                     <nav class="breadcrumb">
-                        <a class="breadcrumb-item" href="{{ url('/') }}">Home</a>
+                        @if (Auth::check())
+                            <a class="breadcrumb-item" href="{{ url('/admin/dashboard') }}">Dashboard</a>
+                        @else
+                            <a class="breadcrumb-item" href="{{ url('/') }}">Home</a>
+                        @endif
                         @foreach($links as $link)
                             @if (!$loop->last)
                                 <a class="breadcrumb-item" href="{{ url($link['url']) }}">{{ $link['name'] }}</a>
