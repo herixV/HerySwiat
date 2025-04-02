@@ -6,7 +6,7 @@
 @endpush
 
 @section('breadcrumbs')
-    <x-breadcrumbs title="Service-Create" :links="[['name' => 'Service-List', 'url' => 'serviceList'],['name' => 'Service-Create', 'url' => 'services']]" />
+    <x-breadcrumbs title="Model-Create" :links="[['name' => 'Model-List', 'url' => 'modelList'],['name' => 'Model-Create', 'url' => '']]" />
 @endsection
 
 @section('content')
@@ -22,9 +22,9 @@
                     </div>
                     @endforeach           
                     @endif
-                    <form action="{{route('serviceStore')}}" class="form-group flex-wrap p-4 border rounded-4" method="POST" enctype="multipart/form-data">
+                    <form action="{{route('modelStore')}}" class="form-group flex-wrap p-4 border rounded-4" method="POST" enctype="multipart/form-data">
                         @csrf
-                        <h2 class=" fs-2  my-3 mb-5">Service New</h2>
+                        <h2 class=" fs-2  my-3 mb-5">Model New</h2>
                         <div class="col-lg-12 my-4">
                           <label for="na,e" class="form-label ">Name</label>
                           <input type="text" id="name" name="name" class="form-control ps-3">
@@ -32,6 +32,16 @@
                         <div class="col-lg-12 my-4">
                           <label for="slug" class="form-label ">Slug</label>
                           <input type="text" id="slug" name="slug" class="form-control ps-3">
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 my-4">
+                                <label for="slug" class="form-label ">Price</label>
+                                <input type="Number" id="price" name="price" class="form-control ps-3">
+                            </div>
+                            <div class="col-lg-6 my-4">
+                                <label for="slug" class="form-label ">Size</label>
+                                <input type="text" id="size" name="size" class="form-control ps-3">
+                            </div>
                         </div>
                         <div class="col-lg-12 my-4">
                             <label for="shortDescription" class="form-label ">Short Description</label>
@@ -41,38 +51,30 @@
                             <label for="description" class="form-label ">Description</label>
                             <textarea id="editor" placeholder="Write Your Description Here" class="form-control ps-3" rows="8" name="description"></textarea>
                         </div>
-                        <div class="row">
-                            <div class="col-lg-6 my-4">
-                                <label class="d-flex align-items-center" from="is_featured">
-                                    <input type="checkbox" class="checked-box me-2" name="is_featured" id="is_featured">
-                                    <span class="label-body">Is Featured</span>
-                                </label>
-                            </div>
-                            <div class="col-lg-6 my-4">
-                                <label class="form-label ">Service Image</label>
-                                <div class="image-upload-container">
-                                    <div class="image-preview" id="imagePreview">
-                                        <img src="" alt="Preview" class="image-preview__image">
-                                        <span class="image-preview__default-text">No image selected</span>
-                                    </div>
-                                    <div class="mt-3 d-flex gap-3">
-                                        <label for="imageUpload" class="btn btn-smaller cursor-pointer">
-                                            <span>Choose Image
-                                                <svg width="18" height="18">
-                                                    <use xlink:href="#upload-solid"></use>
-                                                </svg>
-                                            </span>
+                        <div class="col-lg-12 my-4">
+                            <label class="form-label ">Dress Image</label>
+                            <div class="image-upload-container">
+                                <div class="image-preview" id="imagePreview">
+                                    <img src="" alt="Preview" class="image-preview__image">
+                                    <span class="image-preview__default-text">No image selected</span>
+                                </div>
+                                <div class="mt-3 d-flex gap-3">
+                                    <label for="imageUpload" class="btn btn-smaller cursor-pointer">
+                                        <span>Choose Image
+                                            <svg width="18" height="18">
+                                                <use xlink:href="#upload-solid"></use>
+                                            </svg>
+                                        </span>
 
-                                        </label>
-                                        <button type="button" id="removeImage" class="btn btn-smaller bg-gray text-dark">
-                                            <span>Remove
-                                                <svg width="18" height="18">
-                                                    <use xlink:href="#trash"></use>
-                                                </svg>
-                                            </span>
-                                        </button>
-                                        <input type="file" id="imageUpload" name="image" accept="image/*" class="d-none">
-                                    </div>
+                                    </label>
+                                    <button type="button" id="removeImage" class="btn btn-smaller bg-gray text-dark">
+                                        <span>Remove
+                                            <svg width="18" height="18">
+                                                <use xlink:href="#trash"></use>
+                                            </svg>
+                                        </span>
+                                    </button>
+                                    <input type="file" id="imageUpload" name="image" accept="image/*" class="d-none">
                                 </div>
                             </div>
                         </div>
@@ -95,23 +97,23 @@
                     <div class="post-sidebar">
                         <div class="widget sidebar-recent-post mb-5">
                             <h4 class="widget-title fw-normal border-bottom pb-3 mb-3">Recent Services</h4>
-                            @foreach ($services as $service)    
+                            @foreach ($dresses as $dress)    
                             <div class="sidebar-post-item d-flex justify-content-center">
                                 <div class="row mb-3">
                                     <div class="col-md-4">
                                         <div class="image-holder">
                                             <a href="#">
-                                                <img src="{{ $service->image }}" alt="blog" class="img-fluid">
+                                                <img src="{{ $dress->image }}" alt="blog" class="img-fluid">
                                             </a>
                                         </div>
                                     </div>
                                     <div class="col-md-8">
                                         <div class="sidebar-post-content">
                                             <h5 class="post-title fs-5">
-                                                <a href="#">{{ $service->name }}</a>
+                                                <a href="#">{{ $dress->name }}</a>
                                             </h5>
                                             <p class="m-0 lh-base" style="font-size: 14px;">
-                                                {{ Str::limit($service->short_description, 70, '...') }}
+                                                {{ Str::limit($dress->short_description, 70, '...') }}
                                             </p>
                                         </div>
                                     </div>

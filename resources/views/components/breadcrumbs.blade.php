@@ -14,7 +14,7 @@
                         @endif
                         @foreach($links as $link)
                             @if (!$loop->last)
-                                <a class="breadcrumb-item" href="{{ url($link['url']) }}">{{ $link['name'] }}</a>
+                                <a class="breadcrumb-item" href="{{ route($link['url']) }}">{{ $link['name'] }}</a>
                             @else
                                 <span class="breadcrumb-item active" aria-current="page">{{ $link['name'] }}</span>
                             @endif

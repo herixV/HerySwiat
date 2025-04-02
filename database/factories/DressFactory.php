@@ -23,7 +23,6 @@ class DressFactory extends Factory
             'short_description' => $this->faker->sentence(), // Descripción corta
             'image' => 'https://picsum.photos/seed/' . $this->faker->unique()->word . '/991/1234/',
             'price' => $this->faker->randomFloat(2, 100, 500), // Precio aleatorio entre 100 y 500
-            'price_unit' => '/' . $this->faker->word, // Unidad de precio aleatoria
             'size' => $this->faker->randomElement(['10 ft', '12 ft', '15 ft']), // Tamaño aleatorio
         ];
     }

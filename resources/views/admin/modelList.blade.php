@@ -1,7 +1,7 @@
 @extends('admin.app')
    
 @section('breadcrumbs')
-<x-breadcrumbs title="Model-List" :links="[['name' => 'Model-List', 'url' => 'Models']]" />
+<x-breadcrumbs title="Models-List" :links="[['name' => 'Models-List', 'url' => 'modelList']]" />
 @endsection
 
 @section('content')
@@ -12,13 +12,14 @@
                 {{ session('success') }}
             </div>
         @endif
-        <x-button route="{{ route('modelCreate')}}" title="Create Models" variant="simple" />
+        <x-button route="{{ route('modelCreate')}}" title="Create Dress" variant="simple" />
         <table class="table table-hover align-middle shadow-sm rounded-3 overflow-hidden">
             <thead  style="background-color: var(--coffee-cream);">
                 <tr>
                     <th scope="col" class="fw-normal ps-4">#</th>
                     <th scope="col" class="fw-normal">Name</th>
-                    <th scope="col" class="fw-normal">Price</th>
+                    {{-- <th scope="col" class="fw-normal">Short Description</th> --}}
+                    <th scope="col" class="fw-normal text-center">Price</th> <!-- Centrado -->
                     <th scope="col" class="fw-normal text-center">Image</th> <!-- Centrado -->
                     <th scope="col" class="fw-normal text-end pe-4">Actions</th>
                 </tr>
@@ -29,19 +30,20 @@
                     <td class="ps-4">1{{ $loop->iteration }}</td>
                     <td>{{ $dress->name }}</td>
                     <td>{{ $dress->price }}</td>
+                    {{-- <td>{{ $service->short_description }}</td> --}}
                     <td class="text-center"> <!-- Contenedor centrado -->
-                        <img src="{{ $dress->image }}" 
+                        <img src="{{ $dress->image ? asset($dress->image) : url('/assets/img/default2.jpg') }}" 
                              class="img-thumbnail rounded-4" 
                              style="width: 300px; height: 100px; object-fit: cover;" 
                              alt="Image">
                     </td>
                     <td class="text-end pe-4">
                         {{-- {{ route('/', ['id'=>$service->id]) }} --}}
-                        <a href="{{ route('serviceEdit', ['id'=>$service->id]) }}" class="btn btn-smaller me-2">Editar</a>
-                        <form action="{{ route('serviceDelete', ['id' => $service->id]) }}" method="POST" style="display: inline;">
+                        <a href="{{ route('modelEdit', ['id'=>$dress->id]) }}" class="btn btn-smaller me-2">Editar</a>
+                        <form action="{{ route('modelDelete', ['id' => $dress->id]) }}" method="POST" style="display: inline;">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-smaller bg-danger text-light" onclick="return confirm('¿Estás seguro de eliminar este servicio?')">Eliminar</button>
+                            <button type="submit" class="btn btn-smaller bg-danger text-light" onclick="return confirm('Are you sure you want to delete this dress?')">Eliminar</button>
                         </form>
                     </td>
                 </tr>

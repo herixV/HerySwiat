@@ -13,7 +13,7 @@
                     @foreach ($dresses as $dress)
                         <div class="col-md-6 col-xl-4 mb-4">
                             <div class="product-item rounded-4">
-                                <img src="{{ asset($dress->image) }}" alt="{{ $dress->name }}"
+                                <img src="{{ $dress->image ? asset($dress->image) : url('/assets/img/default2.jpg') }}"
                                     class="img-fluid rounded-4">
                             </div>
                             <div class="product-content">

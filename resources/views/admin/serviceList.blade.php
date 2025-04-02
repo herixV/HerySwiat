@@ -30,7 +30,7 @@
                     <td>{{ $service->name }}</td>
                     {{-- <td>{{ $service->short_description }}</td> --}}
                     <td class="text-center"> <!-- Contenedor centrado -->
-                        <img src="{{ $service->image }}" 
+                        <img src="{{ $service->image ? asset($service->image) : url('/assets/img/default2.jpg') }}" 
                              class="img-thumbnail rounded-4" 
                              style="width: 300px; height: 100px; object-fit: cover;" 
                              alt="Image">
@@ -41,7 +41,7 @@
                         <form action="{{ route('serviceDelete', ['id' => $service->id]) }}" method="POST" style="display: inline;">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-smaller bg-danger text-light" onclick="return confirm('¿Estás seguro de eliminar este servicio?')">Eliminar</button>
+                            <button type="submit" class="btn btn-smaller bg-danger text-light" onclick="return confirm('Are you sure you want to delete this service?')">Eliminar</button>
                         </form>
                     </td>
                 </tr>

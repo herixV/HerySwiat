@@ -14,7 +14,7 @@
             <article class="post-item">
               <h3 class="display-3 fw-normal mb-5">{{ $service->name}}</h3>
               <div class="hero-image mt-5">
-                <img src="{{$service->image}}" alt="single-post" class="img-fluid">
+                <img src="{{ $service->image ? asset($service->image) : url('/assets/img/default2.jpg') }}" alt="single-post" class="img-fluid">
               </div>
               <div class="post-content py-5">
                 <p>{{ $service->short_description}}</p>

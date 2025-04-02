@@ -17,9 +17,8 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->text('description');
             $table->text('short_description');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->decimal('price', 10, 2); // Precio con 2 decimales
-            $table->string('price_unit'); // Unidad de precio
             $table->string('size'); // Tamaño
             $table->timestamps();
         });

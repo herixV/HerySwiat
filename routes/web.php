@@ -46,16 +46,19 @@ Route::post('admin/serviceStore', [ServiceController::class, 'store'])->name('se
 // Edit Service
 Route::get('admin/serviceEdit/{id}', [ServiceController::class, 'edit'])->name('serviceEdit')->middleware('auth');
 Route::put('admin/serviceUpdate/{id}', [ServiceController::class, 'update'])->name('serviceUpdate')->middleware('auth');
-
+// Delete Service
 Route::delete('admin/serviceDelete/{id}', [ServiceController::class, 'destroy'])->name('serviceDelete')->middleware('auth');
 
 // CRUD Administration models
 Route::get('/admin/modelList', [ModelsController::class, 'modelList'])->name('modelList')->middleware('auth');
+// Create Model
 Route::get('/admin/modelCreate', [ModelsController::class, 'create'])->name('modelCreate')->middleware('auth');
 Route::post('/admin/modelStore', [ModelsController::class, 'store'])->name('modelStore')->middleware('auth');
+// Edit Model
 Route::get('/admin/modelEdit/{id}', [ModelsController::class, 'edit'])->name('modelEdit')->middleware('auth');
 Route::put('/admin/modelUpdate/{id}', [ModelsController::class, 'update'])->name('modelUpdate')->middleware('auth');
-Route::get('/admin/modelDelete/{id}', [ModelsController::class, 'destroy'])->name('modelDelete')->middleware('auth');
+// Delete Model
+Route::delete('/admin/modelDelete/{id}', [ModelsController::class, 'destroy'])->name('modelDelete')->middleware('auth');
 // Route::fallback(function () {
 //     return view('404');
 // });

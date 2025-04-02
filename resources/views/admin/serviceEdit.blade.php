@@ -6,7 +6,7 @@
 @endpush
 
 @section('breadcrumbs')
-    <x-breadcrumbs title="Service-Edit" :links="[['name' => 'Service-edit', 'url' => 'services']]" />
+    <x-breadcrumbs title="Service-Edit" :links="[['name' => 'Service-List', 'url' => 'serviceList'],['name' => 'Service-edit', 'url' => 'services']]" />
 @endsection
 
 @section('content')
@@ -50,11 +50,15 @@
                                 <div class="image-upload-container">
                                     <div class="image-preview" id="imagePreview">
                                        
-                                        <img src="{{$service->image}}" alt="Preview" class="image-preview__image">
+                                        <img src="{{ $service->image ? asset($service->image) : '' }}" 
+                                        alt="Preview" 
+                                        class="image-preview__image" 
+                                        style="{{ $service->image ? 'display:block;' : 'display:none;' }}">
                                         
-                                        {{-- <img src="" alt="Preview" class="image-preview__image"> --}}
-                                        
-                                        <span class="image-preview__default-text">No image selected</span>
+                                        <span class="image-preview__default-text" 
+                                            style="{{ $service->image ? 'display:none;' : 'display:block;' }}">
+                                            No image selected
+                                        </span>
                                     </div>
                                     <div class="mt-3 d-flex gap-3">
                                         <label for="imageUpload" class="btn btn-smaller cursor-pointer">

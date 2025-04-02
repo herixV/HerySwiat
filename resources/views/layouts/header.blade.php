@@ -88,7 +88,11 @@
                             </li>
                             <li class="nav-item px-3">
                                 <a class="nav-link p-0 {{ Request()->routeIs('serviceList') ? 'active' : '' }}"
-                                    href="{{ route('serviceList') }}">serviceList</a>
+                                    href="{{ route('serviceList') }}">services List</a>
+                            </li>
+                            <li class="nav-item px-3">
+                                <a class="nav-link p-0 {{ Request()->routeIs('modelList') ? 'active' : '' }}"
+                                    href="{{ route('modelList') }}">models List</a>
                             </li>
                             {{-- <li class="nav-item px-3">
                                 <a class="nav-link p-0 {{ Request::is('gallery') ? 'active' : '' }}"

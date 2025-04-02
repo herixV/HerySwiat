@@ -112,7 +112,6 @@ class ServiceController extends Controller
     public function update(Request $request, string $id)
     {
         $service = Services::find($id);
-
         $request->validate([
             'name' => ['required', 'max:30'],
             'slug' => ['required', 'max:30'],
@@ -121,15 +120,38 @@ class ServiceController extends Controller
             'is_featured' => 'nullable',
             'image' => ['nullable','max:2048','extensions:jpg,png']
         ]);
-        $image="";
+        
+        // Caso 1: Si se sube una nueva imagen
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $filename = time() . '_' . $file->getClientOriginalName();
             $file->move(public_path('assets/img/services'), $filename);
             $image = url('assets/img/services/' . $filename);
-        } else {
+            
+            // Eliminar la imagen anterior si existe
+            if ($service->image != "") {
+                $oldImagePath = public_path('assets/img/services/' . basename($service->image));
+                if (file_exists($oldImagePath) && !is_dir($oldImagePath)) {
+                    unlink($oldImagePath);
+                }
+            }
+        }
+        // Caso 2: Si el campo image está vacío (el usuario quiere borrar la imagen)
+        elseif ($request->input('image') === null || $request->input('image') === '') {
+            // Eliminar la imagen anterior si existe
+            if ($service->image != "") {
+                $oldImagePath = public_path('assets/img/services/' . basename($service->image));
+                if (file_exists($oldImagePath) && !is_dir($oldImagePath)) {
+                    unlink($oldImagePath);
+                }
+            }
+            $image = ""; // Guardar como vacío en la BD
+        }
+        // Caso 3: Si no se envía nada en el campo image (mantener la imagen actual)
+        else {
             $image = $service->image;
         }
+
         $service->name = $request->name;
         $service->slug = $request->slug;
         $service->short_description = $request->short_description;
@@ -137,6 +159,7 @@ class ServiceController extends Controller
         $service->is_featured = $request->has('is_featured') ? true : false;
         $service->image = $image;
         $service->save();
+
         return redirect()->route('serviceList')->with('success', 'Service updated successfully');
     }
 
@@ -153,18 +176,13 @@ class ServiceController extends Controller
             return redirect()->route('serviceList')->with('error', 'Service not found');
         }
 
-        // Opcional: Eliminar la imagen asociada si existe
-        if ($service->image) {
-            $imagePath = parse_url($service->image, PHP_URL_PATH);
-            $imagePath = str_replace('/assets/img/services/', '', $imagePath);
-            $fullPath = public_path('assets/img/services/' . $imagePath);
-            
-            if (file_exists($fullPath)) {
-                unlink($fullPath);
+        // Eliminar la imagen anterior si existe
+        if ($service->image != "") {
+            $oldImagePath = public_path('assets/img/services/' . basename($service->image));
+            if (file_exists($oldImagePath) && !is_dir($oldImagePath)) {
+                unlink($oldImagePath);
             }
         }
-
-        // Eliminar el servicio
         $service->delete();
 
         return redirect()->route('serviceList')->with('success', 'Service deleted successfully');
