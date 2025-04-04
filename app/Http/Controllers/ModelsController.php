@@ -58,7 +58,7 @@ class ModelsController extends Controller
             'size' => ['required', 'max:10'],
             'short_description' => ['required', 'max:200'],
             'description' => ['required', 'max:800'],
-            'image' => ['required','max:2048','extensions:jpg,png']
+            'image' => ['required','max:2048','mimes:jpg,jpeg,png']
         ]);
         $file = $request->file('image');
         $filename = time() . '_' . $file->getClientOriginalName();
@@ -93,6 +93,9 @@ class ModelsController extends Controller
         $socialNetworks = SocialNetworks::where('company_id', $company->id)->get();
         $dresses = Dress::orderBy('id','desc')->paginate(6);
         $dress = Dress::where('id', $id)->first();
+        if (!$dress) {
+            return redirect()->route('modelList')->with('error', 'Dress not found');
+        }
         return view(
             'admin.modelEdit',
             [
@@ -110,6 +113,9 @@ class ModelsController extends Controller
     public function update(Request $request, string $id)
     {
         $dress = Dress::find($id);
+        if (!$dress) {
+            return redirect()->route('modelList')->with('error', 'Dress not found');
+        }
         $request->validate([
             'name' => ['required', 'max:30'],
             'slug' => ['required', 'max:30'],
@@ -169,7 +175,9 @@ class ModelsController extends Controller
     public function destroy(string $id)
     {
         $dress = Dress::find($id);
-
+        if (!$dress) {
+            return redirect()->route('modelList')->with('error', 'Dress not found');
+        }
         // verificar si el dress existe
         if (!$dress) {
             return redirect()->route('modelList')->with('error', 'Model not found');

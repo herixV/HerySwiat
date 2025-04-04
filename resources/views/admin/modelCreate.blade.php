@@ -51,7 +51,7 @@
                             <label for="description" class="form-label ">Description</label>
                             <textarea id="editor" placeholder="Write Your Description Here" class="form-control ps-3" rows="8" name="description"></textarea>
                         </div>
-                        <div class="col-lg-12 my-4">
+                        <div class="col-lg-3 my-4">
                             <label class="form-label ">Dress Image</label>
                             <div class="image-upload-container">
                                 <div class="image-preview" id="imagePreview">

@@ -12,6 +12,11 @@
                 {{ session('success') }}
             </div>
         @endif
+        @if(session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
         <x-button route="{{ route('modelCreate')}}" title="Create Dress" variant="simple" />
         <table class="table table-hover align-middle shadow-sm rounded-3 overflow-hidden">
             <thead  style="background-color: var(--coffee-cream);">

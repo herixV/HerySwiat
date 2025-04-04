@@ -104,7 +104,7 @@
                 <aside class="col-md-3">
                     <div class="post-sidebar">
                         <div class="widget sidebar-recent-post mb-5">
-                            <h4 class="widget-title fw-normal border-bottom pb-3 mb-3">Recent Services</h4>
+                            <h4 class="widget-title fw-normal border-bottom pb-3 mb-3">Recent Dresses</h4>
                             @foreach ($dresses as $dress)    
                             <div class="sidebar-post-item d-flex justify-content-center">
                                 <div class="row mb-3">

@@ -93,6 +93,9 @@ class ServiceController extends Controller
         $socialNetworks = SocialNetworks::where('company_id', $company->id)->get();
         $services = Services::orderBy('id','desc')->take(5)->get();
         $service = Services::find($id);
+        if (!$service) {
+            return redirect()->route('serviceList')->with('error', 'The service does not exist.');
+        }
 
 
         return view(
@@ -112,6 +115,9 @@ class ServiceController extends Controller
     public function update(Request $request, string $id)
     {
         $service = Services::find($id);
+        if (!$service) {
+            return redirect()->route('serviceList')->with('error', 'The service does not exist.');
+        }
         $request->validate([
             'name' => ['required', 'max:30'],
             'slug' => ['required', 'max:30'],
@@ -170,6 +176,9 @@ class ServiceController extends Controller
     {
         // Buscar el servicio por su ID
         $service = Services::find($id);
+        if (!$service) {
+            return redirect()->route('serviceList')->with('error', 'The service does not exist.');
+        }
 
         // Verificar si el servicio existe
         if (!$service) {
